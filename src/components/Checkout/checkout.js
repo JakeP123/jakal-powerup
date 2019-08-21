@@ -61,7 +61,9 @@ const Checkout = () => {
             <br></br>
             <div className="button">
                 <button className="checkout">Power Me Up!</button>
+               
             </div>
+            <h4 style={{color:"red", fontStyle: "italic"}}>(Fake Payment - Ejects Battery)</h4>
             <br></br>
             <br></br>
         </div>
