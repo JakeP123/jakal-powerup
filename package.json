@@ -9,13 +9,15 @@
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-sticky-footer": "0.1.0-rc3"
+    "react-sticky-footer": "0.1.0-rc3",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   },
   "scripts": {
-    "build-dev": "react-scripts build && nodemon server.js",
-    "heroku-postbuild": "rm -rf ./build && react-scripts build",
-    "start-dev": "react-scripts start",
+    "start-frontend-dev": "react-scripts start",
+    "start-backend-dev": "nodemon server.js",
     "start": "node server.js",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -45,5 +47,6 @@
     "jakal"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy": "http://localhost:3001"
 }
