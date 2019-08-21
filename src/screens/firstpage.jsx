@@ -29,19 +29,8 @@ class FirstPage extends React.Component {
                     <h4 style={{color:"red", fontStyle: "italic"}}>(QR Code Scan Will Do This Once Programmed)</h4>
                 </div>
                 <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <p>==============================================================================================================</p>
-                <h3 className="demo" style={{ color: "blue" }}> Page 2 to appear after QR Scan -- Demo Use Only</h3>
-                <br></br>
-                <br></br>
-                <br></br>
-                <div>
-                    <Checkout />
-                </div>
+                
+             
 
                 <StickyFooter
                     bottomThreshold={50}
