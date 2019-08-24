@@ -2,7 +2,7 @@ import React from 'react'
 import "./checkout.css"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const Checkout = () => {
+const Checkout = (props) => {
     return (
 
         <div>
@@ -60,10 +60,10 @@ const Checkout = () => {
             <br></br>
             <br></br>
             <div className="button">
-                <button className="checkout">Power Me Up!</button>
-               
+                {/* <button className="checkout" onClick={props.sendDataToApi}>Power Me Up!</button> */}
+                <button className="checkout" onClick={() => { this.props.history.push('rental') }}>Power Me Up!</button>
             </div>
-            <h4 style={{color:"red", fontStyle: "italic"}}>(Fake Payment - Ejects Battery)</h4>
+    
             <br></br>
             <br></br>
         </div>

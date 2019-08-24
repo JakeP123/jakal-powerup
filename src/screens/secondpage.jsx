@@ -1,9 +1,32 @@
 import React from "react";
 import StickyFooter from 'react-sticky-footer'
+import socketIo from 'socket.io-client'
 import Checkout from '../components/Checkout/checkout'
 
 
 class SecondPage extends React.Component {
+    componentDidMount() {
+        this.socket = socketIo.connect();
+
+        this.socket.on('newData', data => {
+            alert(JSON.stringify(data));
+        });
+    }
+
+    sendDataToApi = () => {
+        fetch('/api/send-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({userId: 1})
+        }).then(res => res.json())
+        .then(res => {
+            console.log('request sent', res);
+            alert('user data sent!!!');
+        }).catch(err => console.log('err sending request', err));
+    }
+
     render() {
         return (
             <div className="scancontainer" style={{ textAlign: "center" }}>
@@ -11,7 +34,7 @@ class SecondPage extends React.Component {
                 <br></br>
             
                 <div>
-                    <Checkout />
+                    <Checkout sendDataToApi={this.sendDataToApi} />
                 </div>
 
                 <StickyFooter

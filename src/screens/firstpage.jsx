@@ -1,18 +1,9 @@
 import React from "react";
-import io from 'socket.io-client'
 import QrScanner from "../components/QRReader/QRReader.js";
-import StickyFooter from 'react-sticky-footer'
-import Checkout from '../components/Checkout/checkout'
+import StickyFooter from 'react-sticky-footer';
+
 
 class FirstPage extends React.Component {
-    componentDidMount() {
-        this.socket = io.connect();
-
-        this.socket.on('newData', data => {
-            alert(JSON.stringify(data));
-        })
-    }
-
     render() {
         return (
             <div className="scancontainer" style={{ textAlign: "center" }}>
@@ -31,7 +22,7 @@ class FirstPage extends React.Component {
                 <img src="https://www.c2dh.uni.lu/sites/default/files/styles/full_width/public/field/image/capture.png" style={{ width: "50%" }} ></img>
                 <br></br>
                 <div className="button">
-                    <button className="checkout" onClick={() => { this.props.history.push('second') }}>Rent A Battery</button>
+                    <button className="checkout" onClick={() => { this.props.history.push('checkout') }}>Rent A Battery</button>
                     <h4 style={{ color: "red", fontStyle: "italic" }}>(QR Code Scan Will Do This Once Programmed)</h4>
                 </div>
                 <br></br>

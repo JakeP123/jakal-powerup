@@ -13,11 +13,15 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "build")))
+
+app.post('/api/send-data', (req, res) => {
+    // send user data to chinese API endpoint
+    res.send({msg: 'request sent'});
+});
 
 app.post('/api/receive-data', (req, res) => {
     if (socketId) {
-        console.log('connected client', socketId);
         io.to(socketId).emit('newData', req.body);
     }
     res.send({data: 'hey works!!!!!'});
