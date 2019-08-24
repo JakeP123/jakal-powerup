@@ -5,6 +5,7 @@ class ThirdPage extends React.Component {
 
     Render() {
         return (
+            <div className="container">
             <Timer>
                 <Timer.Days /> days
     <Timer.Hours /> hours
@@ -45,6 +46,7 @@ class ThirdPage extends React.Component {
 
 
             </StickyFooter>
+            </div>
 )
     }
 
