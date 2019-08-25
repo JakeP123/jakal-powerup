@@ -1,56 +1,49 @@
 import React from "react";
-import StickyFooter from 'react-sticky-footer'
-import Timer from 'react-compound-timer'
+import Timer from 'react-compound-timer';
+import Footer from "../components/Sticky Footer/stickyfooter";
+import Header from "../components/Header/header";
+import "./pagecss.css";
+
+
 class ThirdPage extends React.Component {
-
-    Render() {
-        return (
-            <div className="container">
-            <Timer>
-                <Timer.Days /> days
-    <Timer.Hours /> hours
-    <Timer.Minutes /> minutes
-    <Timer.Seconds /> seconds
-    <Timer.Milliseconds /> milliseconds
-</Timer>
-
-
-            <StickyFooter
-                bottomThreshold={50}
-                normalStyles={{
-                    backgroundColor: "#999999",
-                    padding: "2rem"
-                }}
-                stickyStyles={{
-                    backgroundColor: "rgba(255,255,255,.8)",
-                    padding: "2rem",
-                    width: "100%",
-                    maxHeight: "2rem"
-                }}
-            >
-                <a href="#" className="box1" style={{ display: "Inline", width: "30%", float: "left" }}>
-                    <img src="https://i.ya-webdesign.com/images/blue-map-pin-png-4.png" href="#" style={{ maxWidth: "3rem", maxHeight: "3rem" }}></img>
-
-                </a>
-
-                <a href="#" className="box2" style={{ display: "Inline", width: "30%", float: "middle" }}>
-
-                    <img src="https://cdn.pixabay.com/photo/2017/09/28/08/58/camera-2794769_960_720.png" style={{ maxWidth: "3rem", maxHeight: "3rem", float: "middle" }}></img>
-                    <img src="https://ui-ex.com/images/transparent-dividers-vertical-line-2.gif" style={{ maxHeight: "4rem", float: "left" }}></img>
-                </a>
-
-                <a href="#" className="box3" style={{ display: "Inline", width: "30%", float: "right" }}>
-                    <img src="https://ui-ex.com/images/transparent-dividers-vertical-line-2.gif" style={{ maxHeight: "4rem", float: "left" }}></img>
-                    <img src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png" style={{ maxWidth: "3rem", maxHeight: "3rem", float: "middle" }}></img>
-                </a>
-
-
-            </StickyFooter>
-            </div>
-)
+    state = {
+        balance: 0
     }
 
+    componentDidMount() {
+        setInterval(() => this.setState(prevState => ({ balance: prevState.balance + 0.0003 })), 1000);
+    }
 
+    render() {
+        const { balance } = this.state;
+
+        return (
+            <div className="scancontainer">
+                <Header />
+                <div className="container2">
+                    <div className="infoBox">
+                        <h1 className="boxTitle"> Your Rental </h1>
+                        <h2 className="boxTitle">Time Elapsed</h2>
+                        <div className="timer scancontainer">
+                        <Timer>
+                            <div className="hours time"><Timer.Hours /> h </div>
+                            <div className="minutes time"><Timer.Minutes /> m </div>
+                            <div className="seconds time"><Timer.Seconds /> s </div>
+                        </Timer>
+                        </div>
+                        <br></br>
+                        <div className="tab">
+                            <h2> Current Balance </h2>
+                            <div className="tabExpense">
+                                <h2>${balance.toFixed(3)}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <Footer />
+                </div>
+            </div>
+        )
+    }
 }
 
 

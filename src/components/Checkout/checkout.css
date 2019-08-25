@@ -4,7 +4,9 @@
     max-width: 840px;
     margin: 0 auto;
     border: solid 2px black;
+    border-radius: 40px;
     overflow: hidden;
+    
 }
 
 .checkout {
@@ -14,8 +16,6 @@
     color: white;
     border-radius: 7px;
     font-weight: bold;
-    
-
 }
 
 .checkout:hover {
@@ -24,14 +24,27 @@
   }
 .button {
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .info {
     text-align: center;
+    margin-bottom: 20px;
+}
+
+.info h1{
+     color: red;
+    font-style: italic;
+}
+
+.info p{
+    font-style: italic;
 }
 
 .check {
     height: 3rem;
+    vertical-align: middle;
    
    
     
@@ -41,21 +54,38 @@
     display: inline;
     padding-right: 4rem;
     padding-left: 1rem;
- margin-bottom: 1rem;
 } 
 
-/* .details2 {
-    margin: 0 auto;
-} */
+.details2 {
+   padding: 10px 0;
+}
 
 /* .detailheader {
     text-align: center;
 } */
-/* .list {
-    margin: 0 auto;
-} */
+
+ul {
+    padding: 0;
+}
+
+.list li {
+    margin-top: 22px;
+    list-style-type: circle;
+}
  .battery {
     transform: rotate(270deg);
     height: 20rem;
     margin-left: -4rem;
 } 
+
+.detailheader {
+    text-decoration: underline;
+}
+
+.battery {
+    height: 20rem;
+}
+
+.cables {
+    margin-top: 20px;
+}

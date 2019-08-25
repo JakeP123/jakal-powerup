@@ -1,0 +1,26 @@
+.gridImages{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.gridImages .box2{
+    border-left:1px solid blue;
+    border-right:1px solid blue;
+}
+
+.gridImages a{
+    text-align: center;
+    margin: 20px 0;
+}
+
+.gridImages img{
+    height: 3rem;
+    width: 3rem;
+}
+
+footer{
+    background-color: rgb(221, 221, 221, 0.5);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

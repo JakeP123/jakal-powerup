@@ -1,29 +1,30 @@
-import React, { Component } from 'react'
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React, { Component } from 'react';
+import Footer from "../Sticky Footer/stickyfooter";
+import Header from "../Header/header";
 
-const mapStyles = {
-    width: '40%',
-    height: '40%',
-  };
 
-  class GoogleMaps extends Component {
-    state = {
-      result: 'No result'
-    }
-render() {
-    return (
-        <Map
-          google={this.props.google}
-          zoom={8}
-          style={mapStyles}
-          initialCenter={{ lat: 47.444, lng: -122.176}}
-        />
-    );
-  } 
+
+class Maps extends Component {
+  state = {
+    result: 'No result'
   }
-  export default GoogleApiWrapper({
-    apiKey: 'AIzaSyAo1y-Zh_ogedposABQPSYseTTtD0cJaYE'
-  })(MapContainer);
+  render() {
+    return (
+
+      <div className="mapContainer" style={{textAlign:"center"}}>
+        <Header />
+        <img src="https://www.c2dh.uni.lu/sites/default/files/styles/full_width/public/field/image/capture.png" style={{ width: "50%" }} ></img>
+       
+       <br></br>
+       <br></br>
+       <br></br>
+    
+        <Footer />
+      </div>
+    );
+  }
+}
+export default Maps
 
 
 
