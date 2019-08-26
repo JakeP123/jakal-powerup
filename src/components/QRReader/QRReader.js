@@ -30,7 +30,7 @@ class QrScanner extends Component {
           facingMode={"rear"}
           onError={this.handleError}
           onScan={this.handleScan}
-          style={{ width: '20%', margin: "0 auto"  }}
+          style={{ width: '30%', margin: "0 auto"  }}
         />
         <p>{this.state.result}</p>
       </div>

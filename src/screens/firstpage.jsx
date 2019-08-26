@@ -10,7 +10,7 @@ class FirstPage extends React.Component {
             <div className="scancontainer">
                 <Header />
                 <div className="content">
-                <h3 className="scantext">Scan QR Code</h3>
+                <h3 className="scantext">Scan QR Code On Battery Station To Begin</h3>
                 <div className="scanner">
                     <QrScanner />
                 </div>
