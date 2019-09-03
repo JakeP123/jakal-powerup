@@ -18,8 +18,7 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 3001
-// Route requires
-const routes = require("./server/routes");
+// Route require
 const user = require('./server/routes/user')
 
 // MIDDLEWARE
@@ -66,7 +65,6 @@ app.post('/get-places', (req, res) => {
 
 // Routes
 app.use('/user', user);
-app.use(routes);
 
 if (process.env.NODE_ENV === 'production') {
 	const path = require('path')

@@ -3,14 +3,14 @@ const router = express.Router()
 const User = require('../database/models/user')
 const passport = require('../passport')
 
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+
 router.get(
     '/google/callback',
     passport.authenticate('google', {
         failureRedirect: process.env.FRONTEND_URL
     }),
     (req, res) => {
-        console.log('reqqqqqqqqqq', req.user);
         res.redirect(`${process.env.FRONTEND_URL}/landing?${encodeURIComponent(req.user.name)}`)
     }
 )
