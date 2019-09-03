@@ -102,7 +102,7 @@ class LoginForm extends Component {
                     </form>
                     <br></br>
                     <br></br>
-                    <a href="/user/google">
+                    <a href={`${process.env.REACT_APP_BACKEND_URL}/user/google`}>
 						Sign in with Google
 						
 					</a>
