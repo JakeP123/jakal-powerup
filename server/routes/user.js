@@ -7,12 +7,11 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 router.get(
     '/google/callback',
     passport.authenticate('google', {
-        //successRedirect: 'http://localhost:3000/landing',
-        failureRedirect: 'http://localhost:3000'
+        failureRedirect: process.env.FRONTEND_URL
     }),
     (req, res) => {
         console.log('reqqqqqqqqqq', req.user);
-        res.redirect(`http://localhost:3000/landing?${encodeURIComponent(req.user.name)}`)
+        res.redirect(`${process.env.FRONTEND_URL}/landing?${encodeURIComponent(req.user.name)}`)
     }
 )
 router.post('/', (req, res) => {
@@ -55,8 +54,6 @@ router.post('/', (req, res) => {
 
 router.post(
     '/login',
-    //passport.authenticate('local', {failureRedirect: 'http://localhost:3000'}),
-
     (req, res) => {
         const { username, password } = req.body;
         User.findOne({ username: username }, (err, user) => {

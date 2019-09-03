@@ -1,10 +1,6 @@
 //Connect to Mongo database
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
-
-//your local database url
-//27017 is the default mongoDB port
-//const uri = 'mongodb://localhost:27017/Users' 
+mongoose.Promise = global.Promise 
 
 mongoose.connect(process.env.MONGODB_URI).then(
     () => { 

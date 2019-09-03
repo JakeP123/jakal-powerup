@@ -102,7 +102,7 @@ class LoginForm extends Component {
                     </form>
                     <br></br>
                     <br></br>
-                    <a href="http://localhost:3001/user/google">
+                    <a href="/user/google">
 						Sign in with Google
 						
 					</a>
