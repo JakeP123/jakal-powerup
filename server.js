@@ -1,5 +1,12 @@
-const path = require("path");
-const express = require("express");
+require('dotenv').config();
+const express = require('express')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const axios = require('axios');
+const session = require('express-session')
+const dbConnection = require('./server/database')
+const MongoStore = require('connect-mongo')(session)
+const passport = require('./server/passport');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -10,10 +17,34 @@ io.on('connection', (socket) => {
     console.log('client connected', socket.id);
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
+// Route requires
+const routes = require("./server/routes");
+const user = require('./server/routes/user')
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "build")))
+// MIDDLEWARE
+app.use(morgan('dev'))
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
+app.use(bodyParser.json())
+
+// Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock',
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false,
+		saveUninitialized: false
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.post('/api/send-data', (req, res) => {
     // send user data to chinese API endpoint
@@ -27,8 +58,26 @@ app.post('/api/receive-data', (req, res) => {
     res.send({data: 'hey works!!!!!'});
 });
 
-app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+app.post('/get-places', (req, res) => {
+	const { lat, lng, radius } = req.body;
+	axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=shop&keyword=dunkin donuts&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+		.then(resp => res.send(resp.data.results)).catch(err => res.status(500).send(err));
 })
 
-server.listen(PORT, () => console.log(`app is listening on port ${PORT}`));
+if (process.env.NODE_ENV === 'production') {
+	const path = require('path')
+	console.log('YOU ARE IN THE PRODUCTION ENV')
+	app.use('/static', express.static(path.join(__dirname, '../build/static')))
+	app.get('/', (req, res) => {
+		res.sendFile(path.join(__dirname, '../build/'))
+	})
+}
+
+// Routes
+app.use('/user', user);
+app.use(routes);
+
+// Starting Server 
+server.listen(PORT, () => {
+	console.log(`App listening on PORT: ${PORT}`)
+});

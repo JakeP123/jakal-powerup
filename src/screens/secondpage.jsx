@@ -8,8 +8,11 @@ import "./pagecss.css";
 
 class SecondPage extends React.Component {
     componentDidMount() {
-        this.socket = socketIo.connect();
+        if (!localStorage.getItem('loggedIn')) {
+            return this.props.history.push('/');
+        }
 
+        this.socket = socketIo.connect();
         this.socket.on('newData', data => {
             alert(JSON.stringify(data));
         });
@@ -21,26 +24,24 @@ class SecondPage extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({userId: 1})
+            body: JSON.stringify({ userId: 1 })
         }).then(res => res.json())
-        .then(res => {
-            console.log('request sent', res);
-            toast.error('Thank You For Your Rental!');
-            this.props.history.push("/rental");
-        }).catch(err => console.log('err sending request', err));
+            .then(res => {
+                console.log('request sent', res);
+                toast.error('Thank You For Your Rental!');
+                this.props.history.push("/rental");
+            }).catch(err => console.log('err sending request', err));
     }
 
     render() {
         return (
-
             <div className="scancontainer">
-              <Header />
+                <Header />
                 <div className="footerSpace margin">
                     <Checkout sendDataToApi={this.sendDataToApi} />
                 </div>
                 <Footer />
             </div>
-
         )
     }
 }

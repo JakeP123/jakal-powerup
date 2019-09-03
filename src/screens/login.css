@@ -1,0 +1,31 @@
+.login {
+    margin-top: 100px;
+}
+
+.login h4{ 
+    font-size: 2rem;
+    color: red;
+}
+.form-input {
+    width: 25%;
+}
+
+.form-label {
+    font-style: italic;
+}
+
+
+.btn {
+    width: 8rem;
+    color:white;
+    background-color: yellowgreen;
+    height: 2rem;
+    margin-top: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    
+}
+
+.btn:hover {
+   background-color: red;
+}

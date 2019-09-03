@@ -13,7 +13,7 @@ class QrScanner extends Component {
        
       })
       
-      alert("QR Code Scanned!")
+     
       window.location.assign(data)
     }
 

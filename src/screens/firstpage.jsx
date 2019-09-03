@@ -5,6 +5,12 @@ import Header from "../components/Header/header";
 import "./pagecss.css";
 
 class FirstPage extends React.Component {
+    componentDidMount() {
+        if (!localStorage.getItem('loggedIn')) {
+            return this.props.history.push('/');
+        }
+    }
+
     render() {
         return (
             <div className="scancontainer">

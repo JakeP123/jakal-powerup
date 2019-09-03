@@ -11,6 +11,9 @@ class ThirdPage extends React.Component {
     }
 
     componentDidMount() {
+        if (!localStorage.getItem('loggedIn')) {
+            return this.props.history.push('/');
+        }
         setInterval(() => this.setState(prevState => ({ balance: prevState.balance + 0.0003 })), 1000);
     }
 
@@ -19,17 +22,18 @@ class ThirdPage extends React.Component {
 
         return (
             <div className="scancontainer">
-                <Header />
+                {/* <Header /> */}
+                <Footer />
                 <div className="container2">
                     <div className="infoBox">
                         <h1 className="boxTitle"> Your Rental </h1>
                         <h2 className="boxTitle">Time Elapsed</h2>
                         <div className="timer scancontainer">
-                        <Timer>
-                            <div className="hours time"><Timer.Hours /> h </div>
-                            <div className="minutes time"><Timer.Minutes /> m </div>
-                            <div className="seconds time"><Timer.Seconds /> s </div>
-                        </Timer>
+                            <Timer>
+                                <div className="hours time"><Timer.Hours /> h </div>
+                                <div className="minutes time"><Timer.Minutes /> m </div>
+                                <div className="seconds time"><Timer.Seconds /> s </div>
+                            </Timer>
                         </div>
                         <br></br>
                         <div className="tab">
@@ -39,7 +43,7 @@ class ThirdPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             </div>
         )
