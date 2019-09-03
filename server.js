@@ -64,6 +64,10 @@ app.post('/get-places', (req, res) => {
 		.then(resp => res.send(resp.data.results)).catch(err => res.status(500).send(err));
 })
 
+// Routes
+app.use('/user', user);
+app.use(routes);
+
 if (process.env.NODE_ENV === 'production') {
 	const path = require('path')
 	console.log('YOU ARE IN THE PRODUCTION ENV')
@@ -72,10 +76,6 @@ if (process.env.NODE_ENV === 'production') {
 		res.sendFile(path.resolve(__dirname + '/build/index.html'))
 	})
 }
-
-// Routes
-app.use('/user', user);
-app.use(routes);
 
 // Starting Server 
 server.listen(PORT, () => {
