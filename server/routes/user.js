@@ -46,27 +46,26 @@ router.post('/', (req, res) => {
             })
             newUser.save((err, savedUser) => {
                 if (err) return res.json(err)
+                delete savedUser.password;
                 res.json(savedUser)
             })
         }
     })
 })
 
-router.post(
-    '/login',
-    (req, res) => {
-        const { username, password } = req.body;
-        User.findOne({ username: username }, (err, user) => {
-            if (err) {
-                res.json({error: 'An error occurred'})
-            } else if (!user || !user.checkPassword(password)) {
-                res.json({ error: 'Incorrect username or password' })
-            } else {
-                delete user.password;
-                res.json(user);
-            }
-        });
-    }
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    User.findOne({ username: username }, (err, user) => {
+        if (err) {
+            res.json({ error: 'An error occurred' })
+        } else if (!user || !user.checkPassword(password)) {
+            res.json({ error: 'Incorrect username or password' })
+        } else {
+            delete user.password;
+            res.json(user);
+        }
+    });
+}
 )
 
 router.get("/user", (req, res, next) => {

@@ -11,7 +11,7 @@ class ThirdPage extends React.Component {
     }
 
     componentDidMount() {
-        if (!localStorage.getItem('loggedIn')) {
+        if (!localStorage.getItem('name')) {
             return this.props.history.push('/');
         }
         setInterval(() => this.setState(prevState => ({ balance: prevState.balance + 0.0003 })), 1000);

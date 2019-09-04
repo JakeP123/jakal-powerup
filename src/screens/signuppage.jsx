@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
 import Header from "../components/Header/header";
 
@@ -36,23 +36,17 @@ class Signup extends Component {
 			.then(response => {
 				// console.log(response)
 				if (!response.data.error) {
-					console.log('successful signup');
-
+                    const {name} = response.data;
+                    localStorage.setItem('name', name);
 					this.setState({
 						redirectTo: '/landing',
-					})
+                    })
 				} else {
-					console.log("User wasn't signed up!")
 					this.setState({
 						error: response.data.error
 					})
-					// alert(this.state.error)
-					console.log(this.state.error)
 				}
 			}).catch(error => {
-				console.log('signup error: ')
-				console.log(error)
-
 			})
 	}
 
@@ -135,7 +129,7 @@ class Signup extends Component {
 
 								>Sign up</button>
 							</div>
-							<p className="lead mt-4">Have An Account? <a href="login">Login</a></p>
+							<p className="lead mt-4">Have An Account? <Link to="/">Login</Link></p>
 							<div>
 								{this.state.error ?
 									<h1> {this.state.error}</h1> :

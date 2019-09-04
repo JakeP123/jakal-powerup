@@ -33,18 +33,15 @@ class LoginForm extends Component {
             })
             .then(response => {
 				if (!response.data.error) {
-					console.log('successful login');
-
+                    const {name} = response.data;
+                    localStorage.setItem('name', name);
 					this.setState({
 						redirectTo: '/landing',
-					})
+                    })
 				} else {
-					console.log("User wasn't logged in!")
 					this.setState({
 						error: response.data.error
-					})
-					// alert(this.state.error)
-					console.log(this.state.error)
+					});
 				}
             }).catch(error => {
                 console.log('login error: ')
@@ -111,7 +108,7 @@ class LoginForm extends Component {
                     </p>
                     {this.state.error ?
 									<h1> {this.state.error}</h1> :
-									<h1></h1>
+									''
 								}
                 </div>
                     </div>

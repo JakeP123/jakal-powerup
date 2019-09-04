@@ -11,10 +11,10 @@ class Footer extends Component {
     }
 
     componentDidMount() {
-        let name = decodeURIComponent(window.location.search);
+        const currentUser = decodeURIComponent(window.location.search);
+        let name = currentUser ? currentUser.slice(1) : localStorage.getItem('name');
         if (name) {
-            localStorage.setItem('loggedIn', true);
-            name = name.slice(1);
+            localStorage.setItem('name', name);
             this.setState({name});
         }
     }

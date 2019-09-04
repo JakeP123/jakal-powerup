@@ -3,6 +3,8 @@ import Footer from "../Sticky Footer/stickyfooter";
 import Header from "../Header/header";
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react';
 import Axios from 'axios';
+import smallLogo from '../../images/smallLogo.png';
+import bigLogo from '../../images/bigLogo.png';
 
 
 class Maps extends Component {
@@ -11,12 +13,11 @@ class Maps extends Component {
     placesCopy: [],
     radius: 9000,
     searchTerm: '',
-    activeLocation: null,
-    markers: []
+    activeMarker: null
   }
 
   componentDidMount() {
-    if (!localStorage.getItem('loggedIn')) {
+    if (!localStorage.getItem('name')) {
       return this.props.history.push('/');
     }
 
@@ -28,14 +29,9 @@ class Maps extends Component {
         }, () => {
           Axios.post('/get-places', {
             lat: latitude, lng: longitude, radius: this.state.radius
-          }).then(res => this.setState({
-            places: res.data, placesCopy: res.data, markers: res.data.map((p, i) => <Marker
-              key={p.id}
-              title={p.vicinity}
-              name={p.vicinity}
-              position={p.geometry.location}
-            />)
-          })).catch(err => console.log('err occuredd', err))
+          }).then(res => {
+            this.setState({ places: res.data, placesCopy: res.data })
+          }).catch(err => console.log('err occuredd', err))
         });
       });
   }
@@ -45,12 +41,7 @@ class Maps extends Component {
     Axios.post('/get-places', {
       lat, lng, radius
     }).then(res => this.setState({
-      places: res.data, placesCopy: res.data, markers: res.data.map((p, i) => <Marker
-        key={p.id}
-        title={p.vicinity}
-        name={p.vicinity}
-        position={p.geometry.location}
-      />)
+      places: res.data, placesCopy: res.data
     })).catch(err => console.log('err occuredd', err))
   });
 
@@ -59,27 +50,27 @@ class Maps extends Component {
     const searchTerm = e.target.value;
     this.setState({
       searchTerm, places: placesCopy.filter(p => {
-        return p.vicinity.toLowerCase().includes(searchTerm.toLowerCase()) || p.plus_code.compound_code.toLowerCase().includes(searchTerm.toLowerCase())
+        return p.vicinity.toLowerCase().includes(searchTerm.toLowerCase()) || p.plus_code.compound_code.toLowerCase().includes(searchTerm.toLowerCase()) || p.zip.toLowerCase().includes(searchTerm.toLowerCase())
       })
     })
   }
 
-  handleMouseEnter = p => {
-    const { markers, userLocation } = this.state;
-    const foundMarker = markers.find(m => m.key === p.id)
-    /*
-    console.log('vvvvvvvvvv', new this.props.google.maps.Marker({
-      position: userLocation,
-      //map: map,
-      //icon: icon1,
-      title: "some marker"
-    }).setIcon);
-    */
-    //foundMarker.setIcon
+  handleMouseEnter = marker => {
+    const { places } = this.state;
+    const foundMarker = places.find(p => p.id === marker.id);
+    foundMarker.activeMarker = true;
+    this.setState({places});
   }
 
+  handleMouseLeave = marker => {
+    const { places } = this.state;
+    const foundMarker = places.find(p => p.id === marker.id);
+    foundMarker.activeMarker = false;
+    this.setState({places});
+  }  
+
   render() {
-    const { userLocation, places, radius, searchTerm, activeLocation, markers } = this.state;
+    const { userLocation, places, radius, searchTerm } = this.state;
     return (
       <div className="map-container" style={{ textAlign: "center" }}>
         <Header />
@@ -92,13 +83,14 @@ class Maps extends Component {
         <div className="whole-map">
           <div className="map-side">
             <div className="search-box">
-              <input value={searchTerm} onChange={this.handleSearchChange} placeholder="enter something here" />
+              <input value={searchTerm} onChange={this.handleSearchChange} placeholder="Search Results" />
             </div>
             {places.map((p, i) => (
-              <div key={p.id} onMouseEnter={() => this.handleMouseEnter(p)} className="map-side__details">
+              <div key={p.id} onMouseEnter={() => this.handleMouseEnter(p)} onMouseLeave={() => this.handleMouseLeave(p)} onMouseOver={() => this.handleMouseEnter(p)} onMouseOut={() => this.handleMouseLeave(p)} className="map-side__details">
                 <div>
                   <p style={{ color: "red" }}>{`PowerUp Station ${i + 1}`}</p>
                   <p>{p.vicinity}</p>
+                  {/* Zip Code: <p>{p.zip}</p> */}
                   <p>Rating: {p.rating}</p>
                 </div>
                 <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${p.photos[0].photo_reference}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`} width="175" height="75" />
@@ -110,10 +102,10 @@ class Maps extends Component {
               {places.map((p, i) => (
                 <Marker
                   key={i}
-                  id={p.id}
                   title={p.vicinity}
                   name={p.vicinity}
                   position={p.geometry.location}
+                  icon={p.activeMarker ? bigLogo : smallLogo}
                 />
               ))}
             </Map>}

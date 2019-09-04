@@ -60,7 +60,13 @@ app.post('/api/receive-data', (req, res) => {
 app.post('/get-places', (req, res) => {
 	const { lat, lng, radius } = req.body;
 	axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=shop&keyword=dunkin donuts&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
-		.then(resp => res.send(resp.data.results)).catch(err => res.status(500).send(err));
+		.then(resp => {
+			Promise.all(resp.data.results.map(p => {
+				return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?place_id=${p.place_id}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(r => r.data.results[0].address_components.find(a => a.types.includes('postal_code')).short_name);
+			})).then(postalCodes => {
+				res.send(resp.data.results.map((p, i) => ({...p, zip: postalCodes[i]})));
+			}).catch(err => res.status(500).send(err));
+		}).catch(err => res.status(500).send(err));
 })
 
 // Routes

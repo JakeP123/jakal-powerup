@@ -6,8 +6,9 @@ import "./pagecss.css";
 
 class FirstPage extends React.Component {
     componentDidMount() {
-        if (!localStorage.getItem('loggedIn')) {
-            return this.props.history.push('/');
+        if (!localStorage.getItem('name')) {
+            console.log("local storage", localStorage.getItem('name'))
+            return this.props.history.push('/landing');
         }
     }
 
@@ -20,9 +21,9 @@ class FirstPage extends React.Component {
                 <div className="scanner">
                     <QrScanner />
                 </div>
-                <div className="button footerSpace">
+                {/* <div className="button footerSpace">
                     <button className="checkout" onClick={() => { this.props.history.push('checkout') }}>Rent A Battery</button>
-                </div>
+                </div> */}
                 </div>
                 <Footer />
             </div>

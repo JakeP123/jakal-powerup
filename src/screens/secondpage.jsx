@@ -8,7 +8,7 @@ import "./pagecss.css";
 
 class SecondPage extends React.Component {
     componentDidMount() {
-        if (!localStorage.getItem('loggedIn')) {
+        if (!localStorage.getItem('name')) {
             return this.props.history.push('/');
         }
 
