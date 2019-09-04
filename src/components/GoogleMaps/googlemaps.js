@@ -86,7 +86,7 @@ class Maps extends Component {
               <input value={searchTerm} onChange={this.handleSearchChange} placeholder="Search Results" />
             </div>
             {places.map((p, i) => (
-              <div key={p.id} onMouseEnter={() => this.handleMouseEnter(p)} onMouseLeave={() => this.handleMouseLeave(p)} onMouseOver={() => this.handleMouseEnter(p)} onMouseOut={() => this.handleMouseLeave(p)} className="map-side__details">
+              <div key={p.id} onMouseEnter={() => this.handleMouseEnter(p)} onMouseLeave={() => this.handleMouseLeave(p)} className="map-side__details">
                 <div>
                   <p style={{ color: "red" }}>{`PowerUp Station ${i + 1}`}</p>
                   <p>{p.vicinity}</p>
