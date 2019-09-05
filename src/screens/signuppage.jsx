@@ -61,11 +61,11 @@ class Signup extends Component {
 					
 
 					<div className="SignupForm" style={{marginTop:"100px"}}>
-						<h4 style={{color:"red", fontSize:"2rem"}}>Sign up</h4>
+						<h4 style={{fontSize:"2rem"}}>Sign up</h4>
 						<form onSubmit={this.handleSubmit} className="form-horizontal">
 							<div className="form-group">
 								<div className="col-1 col-ml-auto">
-									<label className="form-label" htmlFor="username">Name</label>
+									<label className="form-label" htmlFor="username"></label>
 								</div>
 								<div className="col-3 col-mr-auto">
 									<input required className="form-input"
@@ -80,7 +80,7 @@ class Signup extends Component {
 							</div>
 							<div className="form-group">
 								<div className="col-1 col-ml-auto">
-									<label className="form-label" htmlFor="username">Username</label>
+									<label className="form-label" htmlFor="username"></label>
 								</div>
 								<div className="col-3 col-mr-auto">
 									<input required className="form-input"
@@ -95,7 +95,7 @@ class Signup extends Component {
 							</div>
 							<div className="form-group">
 								<div className="col-1 col-ml-auto">
-									<label className="form-label" htmlFor="password">Password: </label>
+									<label className="form-label" htmlFor="password"></label>
 								</div>
 								<div className="col-3 col-mr-auto">
 									<input required className="form-input"
@@ -109,7 +109,7 @@ class Signup extends Component {
 							</div>
 							<div className="form-group">
 								<div className="col-1 col-ml-auto">
-									<label className="form-label" htmlFor="password2">Confirm Password: </label>
+									<label className="form-label" htmlFor="password2"></label>
 								</div>
 								<div className="col-3 col-mr-auto">
 									<input required className="form-input"
@@ -124,7 +124,7 @@ class Signup extends Component {
 							<div className="form-group ">
 								<div className="col-7"></div>
 								<button
-									className="btn btn-primary col-1 col-mr-auto"
+									className="signupBtn"
 									type="submit"
 
 								>Sign up</button>

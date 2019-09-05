@@ -80,3 +80,27 @@ header{
   font-weight: bold;
   font-size: 16px;
 }
+
+.map-side{
+  height: 100vh;
+  overflow: scroll;
+}
+
+#map-area > div{
+  height: calc(100%-195px) !important;
+}
+
+.signupBtn{
+  width: 200px;
+  color:white;
+  background-color: yellowgreen;
+  height: 2.5rem;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 16px;
+}
+
+.signupBtn:hover{
+  background-color: red;
+}

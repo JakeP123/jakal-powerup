@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios';
 import Header from "../components/Header/header";
+import ggImg from "../images/googleimage.png";
 import "./login.css";
 
 class LoginForm extends Component {
@@ -32,17 +33,17 @@ class LoginForm extends Component {
                 password: this.state.password
             })
             .then(response => {
-				if (!response.data.error) {
-                    const {name} = response.data;
+                if (!response.data.error) {
+                    const { name } = response.data;
                     localStorage.setItem('name', name);
-					this.setState({
-						redirectTo: '/landing',
+                    this.setState({
+                        redirectTo: '/landing',
                     })
-				} else {
-					this.setState({
-						error: response.data.error
-					});
-				}
+                } else {
+                    this.setState({
+                        error: response.data.error
+                    });
+                }
             }).catch(error => {
                 console.log('login error: ')
                 console.log(error);
@@ -56,62 +57,63 @@ class LoginForm extends Component {
         } else {
             return (
                 <div className="scancontainer">
-                <Header />
-              
-                <div className="login">
-                    <h4>Login</h4>
-                    <form className="form-horizontal" onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="username">Username</label>
+                    <Header />
+
+                    <div className="login">
+                        <h4>Login</h4>
+                        <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                            <div className="form-group">
+                                <div className="col-1 col-ml-auto">
+                                    <label className="form-label" htmlFor="username"></label>
+                                </div>
+                                <div className="col-3 col-mr-auto">
+                                    <input required className="form-input"
+                                        type="text"
+                                        id="username"
+                                        name="username"
+                                        placeholder="Username"
+                                        value={this.state.username}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
-                            <div className="col-3 col-mr-auto">
-                                <input required className="form-input"
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    placeholder="Username"
-                                    value={this.state.username}
-                                    onChange={this.handleChange}
-                                />
+                            <div className="form-group">
+                                <div className="col-1 col-ml-auto">
+                                    <label className="form-label" htmlFor="password"></label>
+                                </div>
+                                <div className="col-3 col-mr-auto">
+                                    <input required className="form-input"
+                                        placeholder="Password"
+                                        type="password"
+                                        name="password"
+                                        value={this.state.password}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="password">Password: </label>
+                            <div className="btnWrapper">
+                                <div>
+                                <button
+                                    className="loginBtn"
+                                    type="submit">Login
+                            </button>
+                                </div>
+                                <div>
+                                <a href={`${process.env.REACT_APP_BACKEND_URL}/user/google`}>
+                                    <img className="google-img" src={ggImg} alt="login with google" />
+                                </a>
+                                </div>
                             </div>
-                            <div className="col-3 col-mr-auto">
-                                <input required className="form-input"
-                                    placeholder="password"
-                                    type="password"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-                        <div className="form-group ">
-                            <div className="col-7"></div>
-                            <button
-                                className="btn btn-primary col-1 col-mr-auto"
-                                type="submit">Login</button>
-                        </div>
-                    </form>
-                    <br></br>
-                    <br></br>
-                    <a href={`${process.env.REACT_APP_BACKEND_URL}/user/google`}>
-						Sign in with Google
-						
-					</a>
-                    <p className="lead mt-4">
-                        No Account? <a href="/signup">Register</a>
-                    </p>
-                    {this.state.error ?
-									<h1> {this.state.error}</h1> :
-									''
-								}
-                </div>
+                        </form>
+                        <p className="lead mt-4">
+                            No Account? <Link to="/signup">Register</Link>
+                        </p>
+                        {this.state.error ?
+                            <h1> {this.state.error}</h1> :
+                            ''
+                        }
                     </div>
+                </div>
             )
         }
     }

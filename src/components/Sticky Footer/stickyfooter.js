@@ -40,9 +40,9 @@ class Footer extends Component {
                     {/* // {*this is the desired "popup"*} */}
                     <div className="box3">
                         <div className="dropup">
-                            <button className="dropbtn"><img src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png" style={{ maxWidth: "3rem", maxHeight: "3rem", float: "middle" }}></img></button>
+                            <Link className="dropbtn"><img src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/social/thumbnail/apple-id-account-person-thumbnail-2x.png" style={{ width: "60px", height: "60px", float: "middle" }}></img></Link>
                             <div className="dropup-content">
-                                <a href="#">{name}<img className="profimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Will_Ferrell_as_MegaMind_by_Gage_Skidmore.jpg/220px-Will_Ferrell_as_MegaMind_by_Gage_Skidmore.jpg"></img>
+                                <a href="#" class="prof-img-wrap">{name}<img className="profimg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Will_Ferrell_as_MegaMind_by_Gage_Skidmore.jpg/220px-Will_Ferrell_as_MegaMind_by_Gage_Skidmore.jpg"></img>
                                </a>
                                 <a href="#" className="borderline"><MaterialIcon icon="person" color="red"/>Profile</a>
                                 <a href="#"><MaterialIcon icon="attach_money" color="red" />Payment Details</a>

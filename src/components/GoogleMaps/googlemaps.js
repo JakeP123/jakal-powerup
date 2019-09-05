@@ -80,8 +80,8 @@ class Maps extends Component {
           <option value={1200}>0.75mi</option>
           <option value={1600}>1.0mi</option>
         </select>
-        <div className="whole-map">
-          <div className="map-side">
+        <div className="whole-map" >
+          <div className="map-side"> 
             <div className="search-box">
               <input value={searchTerm} onChange={this.handleSearchChange} placeholder="Search Results" />
             </div>
